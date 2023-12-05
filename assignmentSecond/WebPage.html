@@ -1,0 +1,101 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="WebPage.css">
+</head>
+<body>
+    <img src="/assignmentSecond/bg.jpeg">
+    <fieldset>
+        <legend><h1>Loan Calculator</h1></legend>
+        <form>
+            <table>
+                <tr>
+                    <td>Employee ID:</td>
+                    <td><input type="text" name="empId" placeholder="Employee ID" id="empId" required></td>
+                </tr>
+                <tr>
+                    <td>Employee Name:</td>
+                    <td><input type="text" name="empname" placeholder="Enter your name" required id="name"></td>
+                </tr>
+                <tr>
+                    <td>Address:</td>
+                    <td><textarea name="addres" placeholder="Type your address here..." id="address" required></textarea></td>
+                </tr>
+
+                <tr>
+                    <td>Designation:</td>
+                    <td><select id="designation" style="margin-bottom: 15px;">
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                    </select></td>
+                </tr>
+
+                <tr>
+                    <td>Loan Amount:</td>
+                    <td><input type="number" id="amount" name="number" placeholder="Enter your amount" required></td>
+                </tr>
+                <tr>
+                    <td>Date of loan taken:</td>
+                    <td><input type="date" id="loandate" name="dolt" required></td>
+                </tr>
+                <tr>
+                    <td>Rate Of Interest:</td>
+                    <td><input type="number" id="interest" name="interest"required></td>
+                </tr>
+                <tr>
+                    <td>Maturity Date:</td>
+                    <td><input type="date" id="mdate" name="md" required></td>
+                </tr>
+                <tr>
+                    <td class="btn1" colspan="2"><input type="reset" name="btn" value="Clear" style="margin-top: 20px; width: 90px;height: 25px; border-radius: 5px;"></td>
+                    <td class="btn1"><input type="button" name="btn" value="Calculate" onclick="LoanCalculator()" style="margin-top: 20px; width: 90px;height: 25px; border-radius: 5px; margin-left:-30px;" ></td>
+                </tr>
+
+            </table>
+        </form>
+    </fieldset>
+
+    <script>
+        function LoanCalculator() {
+            var employeeId = document.getElementById('empId').value;
+            var designation = document.getElementById('designation').value;
+            var amount = parseFloat(document.getElementById('amount').value); // Parse amount as float
+            var interest = parseFloat(document.getElementById('interest').value);
+
+            var idRegex = /^E.{3,}$/;
+            if (!idRegex.test(employeeId)) {
+                alert('Employee Id format is invalid. It must start with letter E and be at least 4 characters');
+                return;
+            }
+
+            var totalAmount = 0;
+            var totalInterest = 0;
+
+            switch (designation) {
+                case 'A':
+                    totalAmount = amount * 1.1;
+                    totalInterest = amount * 0.1;
+                    break;
+
+                case 'B':
+                    totalAmount = amount * 1.05;
+                    totalInterest = amount * 0.05;
+                    break;
+
+                case 'C':
+                    totalAmount = amount * 1.03;
+                    totalInterest = amount * 0.03;
+                    break;
+
+                case 'D':
+                    totalAmount = amount * 1.02;
+                    totalInterest = amount * 0.02;
+                    break;
+            }
+
+            alert('Employee Id: ' + employeeId + '\nDesignation: ' + designation + '\nTotal Loan Amount: ' + totalAmount.toFixed(2) + '\nTotal Interest: ' + totalInterest.toFixed(2));
+        }
+    </script>
+</body>
+</html>
